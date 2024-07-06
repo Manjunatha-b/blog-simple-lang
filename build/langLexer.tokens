@@ -1,0 +1,14 @@
+OpenParen=1
+CloseParen=2
+Plus=3
+Minus=4
+Multiply=5
+Divide=6
+WhiteSpaces=7
+DecimalLiteral=8
+'('=1
+')'=2
+'+'=3
+'-'=4
+'*'=5
+'/'=6

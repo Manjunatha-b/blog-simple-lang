@@ -1,0 +1,1 @@
+java -jar antlr.jar -Dlanguage=Go -Xexact-output-dir -o build -package BaseLang -visitor  src/Lang.g4 

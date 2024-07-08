@@ -7,16 +7,8 @@ import (
 	"github.com/antlr4-go/antlr/v4"
 )
 
-type LangVisitor struct {
-	parser.BaseLangVisitor
-}
-
-func NewLangExecutor() *LangVisitor {
-	return &LangVisitor{}
-}
-
 func Execute(code string) float64 {
-	executor := NewLangExecutor()
+	executor := &LangVisitor{}
 
 	inputStream := antlr.NewInputStream(code)
 	lexer := parser.NewLangLexer(inputStream)
@@ -27,20 +19,31 @@ func Execute(code string) float64 {
 	return executor.Visit(tree).(float64)
 }
 
+type LangVisitor struct {
+	parser.BaseLangVisitor
+}
+
 func (v *LangVisitor) Visit(tree antlr.ParseTree) interface{} {
+	// traverse the tree
 	return tree.Accept(v)
 }
 
 func (v *LangVisitor) VisitUnit(ctx *parser.UnitContext) interface{} {
 	if ctx.OpenParen() != nil && ctx.CloseParen() != nil {
+
 		// [brackets] case
 		return ctx.GetBracketContent().Accept(v)
+
 	} else if ctx.GetBase() != nil {
+
 		// [plain number] case
 		num, _ := strconv.ParseFloat(ctx.DecimalLiteral().GetText(), 64)
 		return num
+
 	} else {
+
 		// [/, *, +, -] case
+		// get left and right operands for the operation
 		left := ctx.GetLeft().Accept(v).(float64)
 		right := ctx.GetRight().Accept(v).(float64)
 

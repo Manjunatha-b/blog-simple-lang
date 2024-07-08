@@ -9,6 +9,7 @@ To build:
 
 ```bash
 ./build.sh
+go mod tidy
 ```
 
 If you have problems with ownership run chmod +x ./build.sh

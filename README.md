@@ -11,12 +11,14 @@ To build:
 ./build.sh
 ```
 
-> If you have problems with ownership run chmod +x ./build.sh
+If you have problems with ownership run chmod +x ./build.sh
 
-> Edit the expression in main.go to test out different ones.
+Edit the expression in main.go to test out different ones.
 
 To run the program:
 
 ```bash
 go run main.go
 ```
+
+> Note: ANTLR jar was downloaded from the main source, and its license is present in ANTLR-license.txt
